@@ -1,20 +1,52 @@
-// Exam.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+
+using namespace std;
+
+class Car {
+private:
+	string Brand;
+	string Model;
+	int Year;
+	double Capacity;
+public:
+
+
+	Car() : Brand{ "None" }, Model{ "None" }, Year{ -1 }, Capacity{ -1 } {};
+	Car(string brand, string model, int year, double capacity) : Brand{ brand }, Model{ model }, Year{ year }, Capacity{ capacity } {};
+	Car(const Car& obj) { Brand = obj.Brand; Model = obj.Model; Year = obj.Year; Capacity = obj.Capacity; };
+
+	void seeAll() {
+		cout << "Car features: " << endl;
+		cout << "Brand: " << Brand << endl;
+		cout << "Year: " << Year << endl;
+		cout << "Capacity: " << Capacity << endl;
+	}
+
+	friend ostream& operator<<(ostream& out, const Car& car);
+
+};
+
+ostream& operator<<(ostream& out, const Car& car) {
+
+	out << "Car features: " << endl;
+	out << "Brand: " << car.Brand << endl;
+	out << "Year: " << car.Year << endl;
+	out << "Capacity: " << car.Capacity << endl;
+
+	return out;
+
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Car car1("Audi", "RS7", 2013, 4.0);
+
+	car1.seeAll();
+	cout << endl;
+
+	//or that way:
+	cout << car1 << endl;
+
+	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
